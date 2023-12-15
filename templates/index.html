@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container shadow mb-3" style="padding: 20px;">
+    <div class="row">
+    <div class="shadow" style="text-align:center" >
+    <h3 style="margin-top:15px;font-family:Slab Serif Fonts;">TODO LIST APP</h3>
+    </div>
+        </div>
+    <div class="row my-5">
+        <div class="col-sm col-md col-lg col-xl col-xxl ms-5">
+            <div class="card shadow" style="width:20rem;height:300px;background-color:#e4e5e0;">
+                <div class="card-title ms-3 mt-3">
+                    <h3 style="font-family:Slab Serif Fonts;">Add ToDo</h3>
+                </div>
+            <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <div  class="" style="text-align:left;margin-left:20px;">
+                <input type="text" placeholder="name" name="name">
+                <input type="text" placeholder="priority" name="priority">
+                <input type="date" name="date"><br>
+                </div>
+                <div style="text-align:center;margin-top:30px;">
+                <input class=" submt rounded px-3" style="" type="submit" >
+                </div>
+            </form>
+            </div>
+            </div>
+        </div>
+        <div class="col-sm col-md col-lg col-xl col-xxl">
+            {% for i in task1 %}
+            <a id="link" href="/cbdv/{{i.id}}"><div class="card shadow my-2" style="width:20rem;height:220px; margin-left:30px;background-color:#e4e5e0;">
+                <div class="card-title ms-3 mt-3">
+                    <h3 style="font-family:Slab Serif Fonts;">ToDo List</h3>
+                </div>
+                <div style="margin-left:15px;">
+                <h4>{{i.name}}</h4>
+                <h5>{{i.priority}}</h5>
+                <h5>{{i.date}}</h5>
+                </div>
+
+                <div>
+                    <a href="{% url 'update' i.id %}"><button class=" submt ms-3 mt-2 rounded px-3" type="submit">update</button></a>
+                    <a href="{% url 'delete' i.id %}"><button class=" submt ms-3 mt-2 rounded px-3" type="submit">delete</button></a>
+                </div>
+            </div></a>
+            {% endfor %}
+      </div>
+</div>
+</div>
+{% endblock %}
+
